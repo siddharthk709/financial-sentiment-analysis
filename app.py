@@ -85,30 +85,30 @@ from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import pickle
 
-# ✅ Load your saved pipeline (TF-IDF + model)
+#  Load your saved pipeline (TF-IDF + model)
 with open('sentiment_pipeline.pkl', 'rb') as f:
     pipeline = pickle.load(f)
 
-# ✅ Mapping label → sentiment
+#  Mapping label → sentiment
 label_map = {
     -1: 'Neutral',
      0: 'Negative',
      1: 'Positive'
 }
 
-# ✅ Choose Bootstrap color classes for each sentiment
+#  Choose Bootstrap color classes for each sentiment
 color_map = {
     'Positive': 'success',  # Green
     'Negative': 'danger',   # Red
     'Neutral': 'warning'    # Yellow/Orange
 }
 
-# ✅ Use external Bootstrap stylesheet
+#  Use external Bootstrap stylesheet
 external_stylesheets = ['https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server  # For deployment
 
-# ✅ App layout
+#  App layout
 app.layout = html.Div([
     html.Div([
         html.H2("📊 Financial Sentiment Classifier", className='text-center text-primary mt-4 mb-4'),
@@ -126,7 +126,7 @@ app.layout = html.Div([
     ], className='container')
 ])
 
-# ✅ Callback to predict sentiment and update card
+#  Callback to predict sentiment and update card
 @app.callback(
     Output('output-card', 'children'),
     Input('submit-button', 'n_clicks'),
@@ -147,7 +147,7 @@ def predict_sentiment(n_clicks, text):
         ])
     return ""
 
-# ✅ Run the app
+#  Run the app
 if __name__ == '__main__':
     app.run(debug=True)
 
